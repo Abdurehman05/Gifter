@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import ApplicationViews from "./components/ApplicationViews";
-import NavBar from "./components/NavBar"
+import NavBar from "./components/NavBar";
 import { UserProfileProvider } from "./providers/UserProfileProvider";
 
 function App() {
