@@ -9,5 +9,9 @@ namespace Gifter.Repositories
         List<Post> GetAll();
         Post GetById(int id);
         List<Post> GetPostByUserProfileId(int id);
+        void Add(Post post);
+        void Update(Post post);
+        public void Delete(int id);
+        List<Post> Search(string searchTerm, bool oldestFirst);
     }
 }
