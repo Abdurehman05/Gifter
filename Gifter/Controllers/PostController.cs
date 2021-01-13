@@ -86,6 +86,10 @@ namespace Gifter.Controllers
             var posts = _postRepository.Search(criterion, oldestFirst);
             return Ok(posts);
         }
-
+        [HttpGet("hottest")]
+        public IActionResult FilterByDate(DateTime since, bool oldestFirst)
+        {
+            return Ok(_postRepository.FilterByDate(since, oldestFirst));
+        }
     }
 }

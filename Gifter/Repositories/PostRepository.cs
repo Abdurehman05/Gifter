@@ -72,5 +72,20 @@ namespace Gifter.Repositories
                 return query.OrderByDescending(p => p.DateCreated).ToList();
             }
         }
+
+        public List<Post> FilterByDate(DateTime since, bool oldestFirst)
+        {
+            var query = _context.Post
+                .Include(p => p.UserProfile)
+                .Where(p => p.DateCreated > since);
+            if(oldestFirst == true)
+            {
+                return query.OrderBy(p => p.DateCreated).ToList();
+            }
+            else
+            {
+                return query.OrderByDescending(p => p.DateCreated).ToList();
+            }
+        }
     }
 }

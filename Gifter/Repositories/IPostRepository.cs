@@ -13,5 +13,6 @@ namespace Gifter.Repositories
         void Update(Post post);
         public void Delete(int id);
         List<Post> Search(string searchTerm, bool oldestFirst);
+        List<Post> FilterByDate(DateTime since, bool oldestFirst);
     }
 }
