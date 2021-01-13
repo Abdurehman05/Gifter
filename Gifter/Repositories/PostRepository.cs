@@ -61,7 +61,8 @@ namespace Gifter.Repositories
         public List<Post> Search(string searchTerm, bool oldestFirst)
         {
             var query = _context.Post
-                .Where(p => p.Title.Contains(searchTerm));
+                .Include(p => p.UserProfile)
+                .Where(p => p.Title.Contains(searchTerm) || p.Caption.Contains(searchTerm));
             if(oldestFirst == true)
             {
                 return query.OrderBy(p => p.DateCreated).ToList();
