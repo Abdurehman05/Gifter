@@ -1,68 +1,87 @@
-import React from "react";
+import React, { useState } from "react";
+import {
+    Form,
+    FormGroup,
+    Card,
+    CardBody,
+    Label,
+    Input,
+    Button,
+} from "reactstrap";
+import { useHistory } from "react-router-dom";
 
 const PostForm = () => {
-    const { addPost } = {}
+    const [userProfileId, setUserProfileId] = useState("");
+    const [imageUrl, setImageUrl] = useState("");
+    const [title, setTitle] = useState("");
+    const [caption, setCaption] = useState("");
 
+    // Use this hook to allow us to programatically redirect users
+    const history = useHistory();
 
-    const handleControlledInputChange = (event) => {
-        addPost[event.target.id] = event.target.value
-        addPost.userProfileId = parseInt(addPost.userProfileId)
-        addPost.dateCreated = Date.now();
-
-    }
-    const clickSavePost = (event) => {
-        event.preventDefault()
-        submitPost(addPost)
-
-    }
-    const submitPost = postObj => {
+    const addPost = (post) => {
         return fetch('/api/Post', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(postObj)
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(post)
         })
+            .then(res => res.json());
+    }
+
+    const submit = (e) => {
+        const post = {
+            imageUrl,
+            title,
+            caption,
+            userProfileId: +userProfileId,
+        };
+
+        addPost(post).then((p) => {
+            // Navigate the user back to the home route
+            history.push("/");
+        });
     };
 
-
     return (
-        <section className="addPostForm">
-            <h2 className="addPostFormTitle">New Post</h2>
-            <form id="addPostForm">
-                <fieldset>
-                    <div className="form-group">
-                        <label htmlFor="Title">Title: </label><br />
-                        <input type="text" id="title" name="title" onChange={handleControlledInputChange} />
-                    </div>
-                </fieldset>
-
-                <fieldset>
-                    <div className="form-group">
-                        <label htmlFor="ImageUrl">Image URL: </label><br />
-                        <input type="text" id="imageUrl" name="imageUrl" onChange={handleControlledInputChange} />
-                    </div>
-                </fieldset>
-
-                <fieldset>
-                    <div className="form-group">
-                        <label htmlFor="Caption">Caption: </label><br />
-                        <input type="text" id="caption" name="caption" onChange={handleControlledInputChange} />
-                    </div>
-                </fieldset>
-
-                <fieldset>
-                    <div className="form-group">
-                        <label htmlFor="UserProfileId">User Profile ID: </label><br />
-                        <input type="text" id="userProfileId" name="userProfileLd" onChange={handleControlledInputChange} />
-                    </div>
-                </fieldset>
-
-                <button onClick={clickSavePost}>Add Post</button>
-
-            </form>
-        </section>
-    )
-}
+        <div className="container pt-4">
+            <div className="row justify-content-center">
+                <Card className="col-sm-12 col-lg-6">
+                    <CardBody>
+                        <Form>
+                            <FormGroup>
+                                <Label for="userId">User Id (For Now...)</Label>
+                                <Input
+                                    id="userId"
+                                    onChange={(e) => setUserProfileId(e.target.value)}
+                                />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for="imageUrl">Gif URL</Label>
+                                <Input
+                                    id="imageUrl"
+                                    onChange={(e) => setImageUrl(e.target.value)}
+                                />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for="title">Title</Label>
+                                <Input id="title" onChange={(e) => setTitle(e.target.value)} />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for="caption">Caption</Label>
+                                <Input
+                                    id="caption"
+                                    onChange={(e) => setCaption(e.target.value)}
+                                />
+                            </FormGroup>
+                        </Form>
+                        <Button color="info" onClick={submit}>
+                            SUBMIT
+            </Button>
+                    </CardBody>
+                </Card>
+            </div>
+        </div>
+    );
+};
 
 export default PostForm;
