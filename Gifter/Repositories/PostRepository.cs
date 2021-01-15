@@ -21,7 +21,10 @@ namespace Gifter.Repositories
         {
             return _context.Post
                 .Include(p => p.UserProfile)
+<<<<<<< HEAD
                 .Include(p => p.Comment)
+=======
+>>>>>>> 2dc9698 (Post serach and user posts component)
                 .Take(20)
                 .OrderByDescending(p => p.DateCreated)
                 .ToList();
