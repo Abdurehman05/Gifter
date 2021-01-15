@@ -22,9 +22,13 @@ namespace Gifter.Repositories
             return _context.Post
                 .Include(p => p.UserProfile)
 <<<<<<< HEAD
+<<<<<<< HEAD
                 .Include(p => p.Comment)
 =======
 >>>>>>> 2dc9698 (Post serach and user posts component)
+=======
+                .Include(p => p.Comment)
+>>>>>>> 707a90d (Firebase Authentication implemented)
                 .Take(20)
                 .OrderByDescending(p => p.DateCreated)
                 .ToList();

@@ -4,7 +4,10 @@ using System;
 using Gifter.Data;
 using Gifter.Models;
 using Gifter.Repositories;
+<<<<<<< HEAD
 using System.Security.Claims;
+=======
+>>>>>>> 707a90d (Firebase Authentication implemented)
 
 namespace Gifter.Controllers
 {
@@ -14,6 +17,7 @@ namespace Gifter.Controllers
     {
         private readonly UserProfileRepository _userProfileRepository;
         public UserProfileController(ApplicationDbContext context)
+<<<<<<< HEAD
         {
             _userProfileRepository = new UserProfileRepository(context);
         }
@@ -21,6 +25,15 @@ namespace Gifter.Controllers
         [HttpGet("{firebaseUserId}")]
         public IActionResult GetUserProfile(string firebaseUserId)
         {
+=======
+        {
+            _userProfileRepository = new UserProfileRepository(context);
+        }
+
+        [HttpGet("{firebaseUserId}")]
+        public IActionResult GetUserProfile(string firebaseUserId)
+        {
+>>>>>>> 707a90d (Firebase Authentication implemented)
             return Ok(_userProfileRepository.GetByFirebaseUserId(firebaseUserId));
         }
 
@@ -31,10 +44,13 @@ namespace Gifter.Controllers
             _userProfileRepository.Add(userProfile);
             return Ok(userProfile);
         }
+<<<<<<< HEAD
         private UserProfile GetCurrentUserProfile()
         {
             var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             return _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
         }
+=======
+>>>>>>> 707a90d (Firebase Authentication implemented)
     }
 }

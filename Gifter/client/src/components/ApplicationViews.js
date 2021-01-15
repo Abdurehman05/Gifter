@@ -2,6 +2,7 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import PostList from "./PostList";
 import PostForm from "./PostForm";
+import Post from "./Post";
 import UserPosts from "./UserPosts";
 
 const ApplicationViews = () => {
