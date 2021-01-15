@@ -5,12 +5,13 @@ import { Link } from "react-router-dom";
 
 const Post = ({ post }) => {
     return (
-        <Card className="m-4">
-            <p className="text-left px-2">Posted by: {post.userProfile.name}</p>
-            <CardImg top src={post.imageUrl} alt={post.title} />
+        <Card  className="m-4">
+            <p className="text-left px-2">Posted by: {post.userProfile.Name}</p>
+            <CardImg top  src={post.imageUrl} alt={post.title} />
             <CardBody>
                 <p>
-                    <Link to={`/posts/${post.id}`}>
+                    <Link to={`/posts/detail${post.id}`}> 
+                    {/* {`/animals/detail/${animal.id}`}> */}
                     <strong>{post.title}</strong>
                     </Link>
                 </p>
