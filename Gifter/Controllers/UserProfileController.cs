@@ -4,6 +4,7 @@ using System;
 using Gifter.Data;
 using Gifter.Models;
 using Gifter.Repositories;
+using System.Security.Claims;
 
 namespace Gifter.Controllers
 {
@@ -29,6 +30,11 @@ namespace Gifter.Controllers
             userProfile.DateCreated = DateTime.Now;
             _userProfileRepository.Add(userProfile);
             return Ok(userProfile);
+        }
+        private UserProfile GetCurrentUserProfile()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
         }
     }
 }
