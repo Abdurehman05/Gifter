@@ -1,30 +1,39 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from "react";
 import Post from "./Post";
-import PostSearch from './PostSearch';
+import PostSearch from "./PostSearch";
+import { UserProfileContext } from "../providers/UserProfileProvider";
 
 const PostList = () => {
-    const [posts, setPosts] = useState([]);
+  const { getToken } = useContext(UserProfileContext);
+  const [post, setPosts] = useState([]);
 
-    useEffect(() => {
-        fetch('/api/Post')
-            .then(res => res.json())
-            .then(data => setPosts(data));
-    }, []);
-
-    return (
-        <>
-            <div className="container">
-                <div className=".row justify-content-center">
-                    <div className="cards-column">
-                        <PostSearch onSearch={setPosts} />
-                        {posts.map((post) => (
-                            <Post key={post.id} post={post} />
-                        ))}
-                    </div>
-                </div>
-            </div >
-        </>
+  useEffect(() => {
+    getToken().then((token) =>
+      fetch("/api/Post", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((resp) => resp.json())
+        .then(setPosts)
     );
+  }, []);
+
+  return (
+    <>
+      <div className="container">
+        <div className=".row justify-content-center">
+          <div className="cards-column">
+            <PostSearch onSearch={setPosts} />
+            {post.map((post) => (
+              <Post key={post.id} post={post} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default PostList;

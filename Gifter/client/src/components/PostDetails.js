@@ -1,16 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { ListGroup, ListGroupItem } from "reactstrap";
 import { useParams } from "react-router-dom";
 import Post from "./Post";
+import { UserProfileContext } from "../providers/UserProfileProvider";
 
 const PostDetails = () => {
   const [post, setPost] = useState();
   const { id } = useParams();
+  const { getToken } = useContext(UserProfileContext);
 
   useEffect(() => {
-    fetch(`/api/Post/${id}`)
-      .then(res => res.json())
-      .then(post => setPost(post));
+    getToken().then((token) =>
+      fetch(`/api/Post/${id}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`, // The token gets added to the Authorization header
+        },
+      })
+        .then((resp) => resp.json())
+        .then((post) => setPost(post))
+    );
   }, []);
 
   if (!post) {
@@ -22,11 +31,11 @@ const PostDetails = () => {
       <div className="row justify-content-center">
         <div className="col-sm-12 col-lg-6">
           <Post post={post} />
-          <ListGroup>
+          {/* <ListGroup>
             {post.comments.map((c) => (
               <ListGroupItem>{c.message}</ListGroupItem>
             ))}
-          </ListGroup>
+          </ListGroup> */}
         </div>
       </div>
     </div>

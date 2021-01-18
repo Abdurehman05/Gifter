@@ -2,37 +2,40 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import PostList from "./PostList";
 import PostForm from "./PostForm";
-import Post from "./Post";
+import PostDetails from "./PostDetails";
 import UserPosts from "./UserPosts";
 import Login from "./Login";
 import Register from "./Register";
+import { UserProfileProvider } from "../providers/UserProfileProvider";
 
 const ApplicationViews = () => {
   return (
     <Switch>
-      <Route path="/login">
-        <Login />
-      </Route>
+      <UserProfileProvider>
+        <Route path="/login">
+          <Login />
+        </Route>
 
-      <Route path="/register">
-        <Register />
-      </Route>
+        <Route path="/register">
+          <Register />
+        </Route>
 
-      <Route path="/" exact>
-        <PostList />
-      </Route>
+        <Route exact path="/">
+          <PostList />
+        </Route>
 
-      <Route path="/posts/add">
-        <PostForm />
-      </Route>
+        <Route path="/posts/add">
+          <PostForm />
+        </Route>
 
-      <Route path="/posts/detail:id">
-        <Post />
-      </Route>
+        <Route path="/posts/:id(\d+)">
+          <PostDetails />
+        </Route>
 
-      <Route path="/users/:userId">
-        <UserPosts />
-      </Route>
+        <Route path="/users/:userId">
+          <UserPosts />
+        </Route>
+      </UserProfileProvider>
     </Switch>
   );
 };
