@@ -5,9 +5,13 @@ using Gifter.Data;
 using Gifter.Models;
 using Gifter.Repositories;
 <<<<<<< HEAD
+<<<<<<< HEAD
 using System.Security.Claims;
 =======
 >>>>>>> 707a90d (Firebase Authentication implemented)
+=======
+using System.Security.Claims;
+>>>>>>> fec22dd (get current user)
 
 namespace Gifter.Controllers
 {
@@ -45,12 +49,18 @@ namespace Gifter.Controllers
             return Ok(userProfile);
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fec22dd (get current user)
         private UserProfile GetCurrentUserProfile()
         {
             var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             return _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
         }
+<<<<<<< HEAD
 =======
 >>>>>>> 707a90d (Firebase Authentication implemented)
+=======
+>>>>>>> fec22dd (get current user)
     }
 }
