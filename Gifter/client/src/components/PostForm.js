@@ -10,7 +10,6 @@ import {
   Button,
 } from "reactstrap";
 
-
 const PostForm = () => {
   const [userProfileId, setUserProfileId] = useState("");
   const [imageUrl, setImageUrl] = useState("");

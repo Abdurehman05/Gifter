@@ -6,12 +6,16 @@ using Gifter.Models;
 using Gifter.Repositories;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 using System.Security.Claims;
 =======
 >>>>>>> 707a90d (Firebase Authentication implemented)
 =======
 using System.Security.Claims;
 >>>>>>> fec22dd (get current user)
+=======
+using System.Security.Claims;
+>>>>>>> ac310e542d4b179d20451732051a910ad814a200
 
 namespace Gifter.Controllers
 {
@@ -22,6 +26,9 @@ namespace Gifter.Controllers
         private readonly UserProfileRepository _userProfileRepository;
         public UserProfileController(ApplicationDbContext context)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> ac310e542d4b179d20451732051a910ad814a200
         {
             _userProfileRepository = new UserProfileRepository(context);
         }
@@ -29,6 +36,7 @@ namespace Gifter.Controllers
         [HttpGet("{firebaseUserId}")]
         public IActionResult GetUserProfile(string firebaseUserId)
         {
+<<<<<<< HEAD
 =======
         {
             _userProfileRepository = new UserProfileRepository(context);
@@ -38,6 +46,8 @@ namespace Gifter.Controllers
         public IActionResult GetUserProfile(string firebaseUserId)
         {
 >>>>>>> 707a90d (Firebase Authentication implemented)
+=======
+>>>>>>> ac310e542d4b179d20451732051a910ad814a200
             return Ok(_userProfileRepository.GetByFirebaseUserId(firebaseUserId));
         }
 
@@ -50,8 +60,11 @@ namespace Gifter.Controllers
         }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> fec22dd (get current user)
+=======
+>>>>>>> ac310e542d4b179d20451732051a910ad814a200
         private UserProfile GetCurrentUserProfile()
         {
             var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
