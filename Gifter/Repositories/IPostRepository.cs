@@ -11,7 +11,7 @@ namespace Gifter.Repositories
         List<Post> GetPostByUserProfileId(int id);
         void Add(Post post);
         void Update(Post post);
-        public void Delete(int id);
+        void Delete(int id);
         List<Post> Search(string searchTerm, bool oldestFirst);
         List<Post> FilterByDate(DateTime since, bool oldestFirst);
     }

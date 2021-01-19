@@ -20,9 +20,9 @@ namespace Gifter.Repositories
                     .FirstOrDefault(up => up.FirebaseUserId == firebaseUserId);
         }
 
-        public void Add(UserProfile userProfile)
+        public void Add(UserProfile user)
         {
-            _context.Add(userProfile);
+            _context.Add(user);
             _context.SaveChanges();
         }
     }

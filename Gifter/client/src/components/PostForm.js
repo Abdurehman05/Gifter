@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import {
   Form,
@@ -9,9 +9,10 @@ import {
   Input,
   Button,
 } from "reactstrap";
+import { UserProfileContext } from "../providers/UserProfileProvider";
 
 const PostForm = () => {
-  const [userProfileId, setUserProfileId] = useState("");
+  const { getToken } = useContext(UserProfileContext);
   const [imageUrl, setImageUrl] = useState("");
   const [title, setTitle] = useState("");
   const [caption, setCaption] = useState("");
@@ -19,41 +20,33 @@ const PostForm = () => {
   // Use this hook to allow us to programatically redirect users
   const history = useHistory();
 
-  const addPost = (post) => {
-    return fetch("/api/Post", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(post),
-    }).then((res) => res.json());
-  };
-
   const submit = (e) => {
     const post = {
       imageUrl,
       title,
       caption,
-      userProfileId: +userProfileId,
     };
 
-    addPost(post).then((p) => {
-      // Navigate the user back to the home route
-      history.push("/");
-    });
+    getToken().then((token) =>
+      fetch("/api/Post", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(post),
+      }).then((p) => {
+        // Navigate the user back to the home route
+        history.push("/");
+      })
+    );
   };
-
   return (
     <div className="container pt-4">
       <div className="row justify-content-center">
         <Card className="col-sm-12 col-lg-6">
           <CardBody>
             <Form>
-              <FormGroup>
-                <Label for="userId">User Id (For Now...)</Label>
-                <Input
-                  id="userId"
-                  onChange={(e) => setUserProfileId(e.target.value)}
-                />
-              </FormGroup>
               <FormGroup>
                 <Label for="imageUrl">Gif URL</Label>
                 <Input

@@ -22,8 +22,6 @@ namespace Gifter.Repositories
             return _context.Post
                 .Include(p => p.UserProfile)
                 .Include(p => p.Comment)
-                .Include(p => p.Comment)
-                .Include(p => p.Comment)
                 .Take(20)
                 .OrderByDescending(p => p.DateCreated)
                 .ToList();

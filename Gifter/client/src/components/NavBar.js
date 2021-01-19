@@ -36,7 +36,7 @@ const NavBar = () => {
               </Link>
             </li>
           </ul>
-          <i>Hello {user.name}</i>
+          <i>Hello, {user.name}</i>
         </>
       ) : (
         <ul className="navbar-nav mr-auto">
